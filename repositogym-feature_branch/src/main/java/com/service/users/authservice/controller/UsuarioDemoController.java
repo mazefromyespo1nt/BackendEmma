@@ -1,7 +1,7 @@
 package com.service.users.authservice.controller;
 
 import com.service.users.authservice.entity.Usuarios;
-import com.service.users.authservice.exception.UsuarioExcepction;
+import com.service.users.authservice.exception.UsuarioException;
 import com.service.users.authservice.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +20,7 @@ public class UsuarioDemoController {
         try {
             Usuarios registeredUser = userService.registerUser(user);
             return new ResponseEntity<>(registeredUser, HttpStatus.CREATED);
-        } catch (UsuarioExcepction e) {
+        } catch (UsuarioException e) {
             return new ResponseEntity<>("El correo electrónico ya está registrado", HttpStatus.CONFLICT);
         } catch (Exception e) {
             return new ResponseEntity<>("Error al registrar el usuario", HttpStatus.BAD_REQUEST);

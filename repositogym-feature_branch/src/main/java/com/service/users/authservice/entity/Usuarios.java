@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -51,18 +52,31 @@ public class Usuarios {
    
     @Column(name = "acces_cred", nullable = false)
     private String password;
-
+   
     @Column(name = "telefono", nullable = false)
     private String telefono;
+    
+    @Column(name = "status", nullable = false, columnDefinition = "Bit(1)")
+    private boolean status = true; 
 
+    @PrePersist
+    protected void onCreate() {
+        this.status = true;
+    }
+
+	
 
 	public Integer getIdUsuario() {
 		return idUsuario;
 	}
 
+
+
 	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
+
+
 
 	public String getNombre() {
 		return nombre;
@@ -127,6 +141,16 @@ public class Usuarios {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
+
+	
 
 
 }
